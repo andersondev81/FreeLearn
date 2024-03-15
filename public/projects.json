@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "name": "UI / UX Design",
+    "description": "Aprenda os princípios básicos de UX e UI para projetar a interface de um aplicativo.",
+    "image": "/src/assets/project-1.webp"
+  },
+  {
+    "id": 2,
+    "name": "Researsh 101",
+    "description": "Aprenda a criar o seu próprio plano de investigação e crie as experiências",
+    "image": "/src/assets/project-2.webp"
+  },
+  {
+    "id": 3,
+    "name": "PhP para iniciantes",
+    "description": "Aprenda a programar na linguagem web más usada pelos gestores de conteúdo",
+    "image": "/src/assets/project-3.webp"
+  }
+]
