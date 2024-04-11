@@ -31,9 +31,9 @@ const skills = [
 
 const Skills = () => {
   return (
-    <div className="lg:mx-12 mx-4 py-32">
-      <div className="mb-20" >
-        <h2 className="md:text-5xl text-4xl text-headingcolor font-bold" id="formacoes" >
+    <div className="lg:mx-12 mx-4 py-32" id="formacoes">
+      <div className="mb-20">
+        <h2 className="md:text-5xl text-4xl text-headingcolor font-bold">
           Escolha nossas formações
         </h2>
       </div>

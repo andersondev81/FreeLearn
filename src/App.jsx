@@ -9,12 +9,13 @@ import Skills from "./components/Skills";
 import Testimonial from "./components/Testimonial";
 import About from "./components/About"; 
 import Login from './components/Login';
-import CoursePage from './components/CoursePage';
+import CoursePage from './components/FigmaCourse';
 
 import './App.css';
 import Faq from './components/Faq';
 import Cursos from './components/Cursos';
 import Register from './components/Register';
+import PHPCourse from './components/PHPCourse';
 
 function App() {
   return (
@@ -27,7 +28,6 @@ function App() {
             <Home />
             <Skills />
             <About />
-            <Portfolio />
             <Testimonial />
             <Contact />
             <Footer />
@@ -37,6 +37,7 @@ function App() {
         <Route path='/faq' element={<Faq/>}></Route>
         <Route path='/cursos' element={<Cursos/>}></Route>
         <Route path='/course/uxdesign' element={<CoursePage/>}></Route>
+        <Route path='/course/php-for-beginners' element={<PHPCourse/>}></Route>
         <Route path='/register' element={<Register/>}></Route>
       </Routes>
     </Router>

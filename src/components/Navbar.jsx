@@ -1,14 +1,13 @@
-/* eslint-disable no-unused-vars */
+
 import React, { useState, useEffect } from "react"
 import logo from "../assets/logo.svg"
 import { HiMenu } from "react-icons/hi"
-import { Link } from "react-scroll"
-import {  useLocation } from 'react-router-dom';
-import { HashLink as LinkRoute } from 'react-router-hash-link';
+import { useLocation } from "react-router-dom"
+import { HashLink as LinkRoute } from "react-router-hash-link"
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isSticky, setIsSticky] = useState(false)
-  const location = useLocation();
+  const location = useLocation()
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen)
@@ -37,29 +36,54 @@ const Navbar = () => {
       >
         <div className="flex items-center justify-between">
           <div className="text-white font-bold text-lg cursor-pointer">
+            <LinkRoute to="/">
             <img src={logo} alt="" className="h-10" />
+            </LinkRoute>
           </div>
 
           {/* for larger device */}
           <div className="lg:flex items-center gap-3 hidden text-body">
-  <LinkRoute className={`block  hover:text-primary py-2 px-4 cursor-pointer ${location.pathname === '/' ? 'text-primary' : ''}`} to="/">HOME
-  </LinkRoute>
-  <LinkRoute smooth to="/#formacoes">FORMAÇÕES</LinkRoute>
-  <LinkRoute className={`block  hover:text-primary py-2 px-4 cursor-pointer ${location.pathname === '/faq' ? 'text-primary' : ''}`} to="/faq">
-  SOBRE
-  </LinkRoute>
-  <LinkRoute className={`block  hover:text-primary py-2 px-4 cursor-pointer ${location.pathname === '/cursos' ? 'text-primary' : ''}`} to="/cursos">
-    CURSOS
-  </LinkRoute>
-  <LinkRoute smooth to="/#testimonials" className="block  hover:text-gray-400 py-2 px-4 cursor-pointer">
-    TESTEMUNHOS
-  </LinkRoute>
-</div>
+            <LinkRoute
+              className={`block  hover:text-primary py-2 px-4 cursor-pointer ${
+                location.pathname === "/" ? "text-primary" : ""
+              }`}
+              to="/"
+            >
+              HOME
+            </LinkRoute>
+            <LinkRoute className="block  hover:text-gray-400 py-2 px-4 cursor-pointer" smooth to="/#formacoes">
+              FORMAÇÕES
+            </LinkRoute>
+            <LinkRoute
+              className={`block  hover:text-primary py-2 px-4 cursor-pointer ${
+                location.pathname === "/faq" ? "text-primary" : ""
+              }`}
+              to="/#about"
+            >
+              SOBRE
+            </LinkRoute>
+            <LinkRoute
+              smooth
+              to="/#testimonials"
+              className="block  hover:text-gray-400 py-2 px-4 cursor-pointer"
+            >
+              TESTEMUNHOS
+            </LinkRoute>
+            <LinkRoute
+              className={`block  hover:text-primary py-2 px-4 cursor-pointer ${
+                location.pathname === "/cursos" ? "text-primary" : ""
+              }`}
+              to="/cursos"
+            >
+              CURSOS
+            </LinkRoute>
+            
+          </div>
 
           {/* contact me btn */}
           <div className="lg:block hidden">
             <button className="px-4 py-2 bg-transparent border border-primary text-primary rounded hover:bg-primary hover:text-white transition-all duration-300">
-                <LinkRoute to="/login">Login/Cadastrar</LinkRoute>
+              <LinkRoute to="/login">Login/Cadastrar</LinkRoute>
             </button>
           </div>
 
@@ -72,56 +96,44 @@ const Navbar = () => {
         {/* Mobile menu */}
         {isMenuOpen && (
           <div className="mt-4 bg-body p-4 rounded-lg text-blue">
-            <Link
-              activeClass="active"
-              smooth={true}
-              spy={true}
-              offset={-100}
-              to="home"
-              className="block hover:text-gray-600 py-2"
+            <LinkRoute
+              className={`block  hover:text-primary py-2 px-4 cursor-pointer ${
+                location.pathname === "/" ? "text-primary" : ""
+              }`}
+              to="/"
             >
-             Home
-            </Link>
-            <Link
-              activeClass="active"
-              smooth={true}
-              spy={true}
-              offset={-100}
-              to="skills"
-              className="block hover:text-gray-400 py-2"
+              HOME
+            </LinkRoute>
+            <LinkRoute
+              smooth
+              to="/#formacoes"
+              className="block  hover:text-gray-400 py-2 px-4 cursor-pointer"
             >
-              Formações
-            </Link>
-            <Link
-              activeClass="active"
-              smooth={true}
-              spy={true}
-              offset={-100}
-              to="about"
-              className="block hover:text-gray-400 py-2"
+              FORMAÇÕES
+            </LinkRoute>
+            <LinkRoute
+              className={`block  hover:text-primary py-2 px-4 cursor-pointer ${
+                location.pathname === "/faq" ? "text-primary" : ""
+              }`}
+              to="/faq"
             >
-              Sobre
-            </Link>
-            <Link
-              activeClass="active"
-              smooth={true}
-              spy={true}
-              offset={-100}
-              to="portfolio"
-              className="block hover:text-gray-400 py-2"
+              SOBRE
+            </LinkRoute>
+            <LinkRoute
+              className={`block  hover:text-primary py-2 px-4 cursor-pointer ${
+                location.pathname === "/cursos" ? "text-primary" : ""
+              }`}
+              to="/cursos"
             >
-              Cursos recomendados
-            </Link>
-            <Link
-              activeClass="active"
-              smooth={true}
-              spy={true}
-              offset={-100}
-              to="testimonials"
-              className="block hover:text-gray-400 py-2"
+              CURSOS
+            </LinkRoute>
+            <LinkRoute
+              smooth
+              to="/#testimonials"
+              className="block  hover:text-gray-400 py-2 px-4 cursor-pointer"
             >
-              Opinião dos usuários
-            </Link>
+              TESTEMUNHOS
+            </LinkRoute>
           </div>
         )}
       </nav>
