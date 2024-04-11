@@ -9,13 +9,16 @@ import Skills from "./components/Skills";
 import Testimonial from "./components/Testimonial";
 import About from "./components/About"; 
 import Login from './components/Login';
+import CoursePage from './components/CoursePage';
 
 import './App.css';
 import Faq from './components/Faq';
 import Cursos from './components/Cursos';
+import Register from './components/Register';
 
 function App() {
   return (
+    <>
     <Router>
       <Routes>
         <Route path="/" element={
@@ -33,8 +36,11 @@ function App() {
         <Route path='/login' element={<Login/>}></Route>
         <Route path='/faq' element={<Faq/>}></Route>
         <Route path='/cursos' element={<Cursos/>}></Route>
+        <Route path='/course/uxdesign' element={<CoursePage/>}></Route>
+        <Route path='/register' element={<Register/>}></Route>
       </Routes>
     </Router>
+    </>
   )
 }
 

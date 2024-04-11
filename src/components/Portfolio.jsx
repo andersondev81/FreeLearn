@@ -1,6 +1,5 @@
-/* eslint-disable react/no-unknown-property */
-
-import { useEffect, useState } from "react"
+import { useEffect, useState } from "react";
+import { Link } from 'react-router-dom';
 
 const Portfolio = () => {
   const [projects, setProjects] = useState([])
@@ -32,11 +31,13 @@ const Portfolio = () => {
               <p className="text-body mb-4">{project.description}</p>
               <a href="/" className="underline underline-offset-8">
                 Veja mais{" "}
-                <img
-                  src="/src/assets/arrow.png"
-                  alt=""
-                  className="w-3 inline-block ml-3"
-                />
+                <Link to='/course/uxdesign'>
+                  <img
+                    src="/src/assets/arrow.png"
+                    alt=""
+                    className="w-3 inline-block ml-3"
+                  />
+                </Link>
               </a>
             </div>
           </div>
@@ -46,4 +47,4 @@ const Portfolio = () => {
   )
 }
 
-export default Portfolio
+export default Portfolio;

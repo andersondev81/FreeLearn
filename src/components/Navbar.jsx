@@ -3,8 +3,8 @@ import React, { useState, useEffect } from "react"
 import logo from "../assets/logo.svg"
 import { HiMenu } from "react-icons/hi"
 import { Link } from "react-scroll"
-import { Link as LinkRoute, useLocation } from 'react-router-dom';
-
+import {  useLocation } from 'react-router-dom';
+import { HashLink as LinkRoute } from 'react-router-hash-link';
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isSticky, setIsSticky] = useState(false)
@@ -42,36 +42,19 @@ const Navbar = () => {
 
           {/* for larger device */}
           <div className="lg:flex items-center gap-3 hidden text-body">
-          <LinkRoute className={`block  hover:text-primary py-2 px-4 cursor-pointer ${location.pathname === '/' ? 'text-primary' : ''}`} to="/">
-              HOME
-            </LinkRoute>
-            <Link
-              activeClass="active"
-              smooth={true}
-              spy={true}
-              offset={-100}
-              to="skills"
-              className="block hover:text-gray-400 py-2 px-4 cursor-pointer"
-            >
-              FORMAÇÕES
-            </Link>
-            <LinkRoute className={`block  hover:text-primary py-2 px-4 cursor-pointer ${location.pathname === '/faq' ? 'text-primary' : ''}`} to="/faq">
-              SOBRE
-            </LinkRoute>
-            <LinkRoute className={`block  hover:text-primary py-2 px-4 cursor-pointer ${location.pathname === '/cursos' ? 'text-primary' : ''}`} to="/cursos">
-              CURSOS
-            </LinkRoute>
-            <Link
-              activeClass="active"
-              smooth={true}
-              spy={true}
-              offset={-100}
-              to="testimonials"
-              className="block  hover:text-gray-400 py-2 px-4 cursor-pointer"
-            >
-              TESTEMUNHOS
-            </Link>
-          </div>
+  <LinkRoute className={`block  hover:text-primary py-2 px-4 cursor-pointer ${location.pathname === '/' ? 'text-primary' : ''}`} to="/">HOME
+  </LinkRoute>
+  <LinkRoute smooth to="/#formacoes">FORMAÇÕES</LinkRoute>
+  <LinkRoute className={`block  hover:text-primary py-2 px-4 cursor-pointer ${location.pathname === '/faq' ? 'text-primary' : ''}`} to="/faq">
+  SOBRE
+  </LinkRoute>
+  <LinkRoute className={`block  hover:text-primary py-2 px-4 cursor-pointer ${location.pathname === '/cursos' ? 'text-primary' : ''}`} to="/cursos">
+    CURSOS
+  </LinkRoute>
+  <LinkRoute smooth to="/#testimonials" className="block  hover:text-gray-400 py-2 px-4 cursor-pointer">
+    TESTEMUNHOS
+  </LinkRoute>
+</div>
 
           {/* contact me btn */}
           <div className="lg:block hidden">
@@ -97,7 +80,7 @@ const Navbar = () => {
               to="home"
               className="block hover:text-gray-600 py-2"
             >
-              Home
+             Home
             </Link>
             <Link
               activeClass="active"

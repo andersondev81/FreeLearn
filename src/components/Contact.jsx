@@ -84,7 +84,7 @@ const Contact = () => {
               id="topic"
               className="block border border-primary rounded-lg py-2 px-2 mt-2 w-full"
             >
-              <option value="1">Selecione uma opção...</option>
+              <option id="contact" value="1">Selecione uma opção...</option>
               <option value="2">UX/UI Design</option>
               <option value="3">Research e documentação</option>
               <option value="4">Front end</option>
