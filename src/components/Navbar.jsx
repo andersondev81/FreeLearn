@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react"
 import logo from "../assets/logo.svg"
 import { HiMenu } from "react-icons/hi"
@@ -37,7 +36,7 @@ const Navbar = () => {
         <div className="flex items-center justify-between">
           <div className="text-white font-bold text-lg cursor-pointer">
             <LinkRoute to="/">
-            <img src={logo} alt="" className="h-10" />
+              <img src={logo} alt="" className="h-10" />
             </LinkRoute>
           </div>
 
@@ -51,7 +50,11 @@ const Navbar = () => {
             >
               HOME
             </LinkRoute>
-            <LinkRoute className="block  hover:text-gray-400 py-2 px-4 cursor-pointer" smooth to="/#formacoes">
+            <LinkRoute
+              className="block  hover:text-gray-400 py-2 px-4 cursor-pointer"
+              smooth
+              to="/#formacoes"
+            >
               FORMAÇÕES
             </LinkRoute>
             <LinkRoute
@@ -59,6 +62,7 @@ const Navbar = () => {
                 location.pathname === "/faq" ? "text-primary" : ""
               }`}
               to="/#about"
+              smooth
             >
               SOBRE
             </LinkRoute>
@@ -69,15 +73,15 @@ const Navbar = () => {
             >
               TESTEMUNHOS
             </LinkRoute>
+
             <LinkRoute
               className={`block  hover:text-primary py-2 px-4 cursor-pointer ${
-                location.pathname === "/cursos" ? "text-primary" : ""
+                location.pathname === "cursos" ? "text-primary" : ""
               }`}
               to="/cursos"
             >
               CURSOS
             </LinkRoute>
-            
           </div>
 
           {/* contact me btn */}
