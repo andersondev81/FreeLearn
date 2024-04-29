@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
-import Navbar from "./Navbar"
+import Navbar from "../components/Navbar"
 
 const Cursos = () => {
   const [projects, setProjects] = useState([])
@@ -12,7 +12,6 @@ const Cursos = () => {
   }, [])
   return (
     <>
-      <Navbar />
       <div className="lg:mx-12 mx-4 my-32" id="portfolio">
         <div className="mb-20 flex flex-col sm:flex-row md:items-center justify-between gap-5">
           <div>

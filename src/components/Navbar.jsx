@@ -27,7 +27,7 @@ const Navbar = () => {
   }, [])
 
   return (
-    <header className="w-full fixed top-0 left-0 right-0">
+    <header className="w-full  top-0 left-0 right-0">
       <nav
         className={`py-4 md:px-12 px-4 bg-white ${
           isSticky ? "sticky top-0 right-0 left-0 bg-white" : ""
@@ -53,41 +53,38 @@ const Navbar = () => {
             <LinkRoute
               className="block  hover:text-gray-400 py-2 px-4 cursor-pointer"
               smooth
-              to="/#formacoes"
+              to="/cursos"
             >
-              FORMAÇÕES
+              CURSOS
             </LinkRoute>
             <LinkRoute
               className={`block  hover:text-primary py-2 px-4 cursor-pointer ${
                 location.pathname === "/faq" ? "text-primary" : ""
               }`}
-              to="/#about"
+              to="/sobre"
               smooth
             >
               SOBRE
             </LinkRoute>
             <LinkRoute
+              className={`block  hover:text-primary py-2 px-4 cursor-pointer ${
+                location.pathname === "/faq" ? "text-primary" : ""
+              }`}
+              to="/dashboard"
               smooth
-              to="/#testimonials"
-              className="block  hover:text-gray-400 py-2 px-4 cursor-pointer"
             >
-              TESTEMUNHOS
+              DASHBOARD
             </LinkRoute>
 
-            <LinkRoute
-              className={`block  hover:text-primary py-2 px-4 cursor-pointer ${
-                location.pathname === "cursos" ? "text-primary" : ""
-              }`}
-              to="/cursos"
-            >
-              CURSOS
-            </LinkRoute>
           </div>
 
           {/* contact me btn */}
           <div className="lg:block hidden">
             <button className="px-4 py-2 bg-transparent border border-primary text-primary rounded hover:bg-primary hover:text-white transition-all duration-300">
-              <LinkRoute to="/login">Login/Cadastrar</LinkRoute>
+              <LinkRoute to="/login">Login</LinkRoute>
+            </button>
+            <button className="px-4 py-2 bg-transparent border border-primary text-primary rounded hover:bg-primary hover:text-white transition-all duration-300">
+              <LinkRoute to="/register">Cadastrar</LinkRoute>
             </button>
           </div>
 
@@ -108,21 +105,7 @@ const Navbar = () => {
             >
               HOME
             </LinkRoute>
-            <LinkRoute
-              smooth
-              to="/#formacoes"
-              className="block  hover:text-gray-400 py-2 px-4 cursor-pointer"
-            >
-              FORMAÇÕES
-            </LinkRoute>
-            <LinkRoute
-              className={`block  hover:text-primary py-2 px-4 cursor-pointer ${
-                location.pathname === "/faq" ? "text-primary" : ""
-              }`}
-              to="/faq"
-            >
-              SOBRE
-            </LinkRoute>
+
             <LinkRoute
               className={`block  hover:text-primary py-2 px-4 cursor-pointer ${
                 location.pathname === "/cursos" ? "text-primary" : ""
@@ -131,12 +114,22 @@ const Navbar = () => {
             >
               CURSOS
             </LinkRoute>
+
+            <LinkRoute
+              className={`block  hover:text-primary py-2 px-4 cursor-pointer ${
+                location.pathname === "/sobre" ? "text-primary" : ""
+              }`}
+              to="/sobre"
+            >
+              SOBRE
+            </LinkRoute>
+
             <LinkRoute
               smooth
-              to="/#testimonials"
+              to="/dashboard"
               className="block  hover:text-gray-400 py-2 px-4 cursor-pointer"
             >
-              TESTEMUNHOS
+              DASHBOARD
             </LinkRoute>
           </div>
         )}

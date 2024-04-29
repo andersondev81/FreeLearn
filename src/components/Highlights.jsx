@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
-import { Link } from 'react-router-dom';
+import { useEffect, useState } from "react"
+import { Link } from "react-router-dom"
 
-const Portfolio = () => {
+const Highlights = () => {
   const [projects, setProjects] = useState([])
 
   useEffect(() => {
@@ -10,7 +10,7 @@ const Portfolio = () => {
       .then(data => setProjects(data))
   }, [])
   return (
-    <div className="lg:mx-12 mx-4 my-32" id="portfolio">
+    <div className="lg:mx-12 mx-4 my-16" id="Hilights">
       <div className="mb-20 flex flex-col sm:flex-row md:items-center justify-between gap-5">
         <div>
           <h2 className="md:text-5xl text-4xl text-headingcolor font-bold">
@@ -31,7 +31,7 @@ const Portfolio = () => {
               <p className="text-body mb-4">{project.description}</p>
               <a href="/" className="underline underline-offset-8">
                 Veja mais{" "}
-                <Link to='/course/uxdesign'>
+                <Link to="/course/uxdesign">
                   <img
                     src="/src/assets/arrow.png"
                     alt=""
@@ -47,4 +47,4 @@ const Portfolio = () => {
   )
 }
 
-export default Portfolio;
+export default Highlights
