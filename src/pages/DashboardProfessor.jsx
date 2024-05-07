@@ -16,7 +16,7 @@ const DashboardProfessor = () => {
 
   const getAllCourses = async () => {
     try {
-      const response = await axios.get('http://localhost:4430/courses/get', {
+      const response = await axios.get('http://localhost:4430/get', {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -45,9 +45,9 @@ const DashboardProfessor = () => {
     }
   };
 
-  const deleteCourse = async (id) => {
+  const deleteCourse = async (_id) => {
     try {
-      await axios.delete(`http://localhost:4430/courses/delete/${courses.id}`, {
+      await axios.delete(`http://localhost:4430/courses/delete/${_id}`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -70,15 +70,18 @@ const DashboardProfessor = () => {
         <button className="bg-blue-500 text-white p-2" onClick={postCourse}>Create Course</button>
       </div>
 
-      {courses.map((course) => (
-        <div key={course.id} className="border p-2 mb-2">
-          <h2 className="text-xl">{course.name}</h2>
-          <p>{course.description}</p>
-          <img src={course.image} alt={course.name} />
-          <a href={course.link}>Link to course</a>
-          <button className="bg-red-500 text-white p-2 ml-2" onClick={() => deleteCourse(course.id)}>Delete</button>
-        </div>
-      ))}
+      {courses && courses.map((course) => {
+  console.log(course);
+  return (
+    <div key={course.id} className="border p-2 mb-2">
+      <h2 className="text-xl">{course.name}</h2>
+      <p>{course.description}</p>
+      <img src={course.image} alt={course.name} />
+      <a href={course.link}>Link to course</a>
+      <button className="bg-red-500 text-white p-2 ml-2" onClick={() => deleteCourse(course._id)}>Delete</button>
+    </div>
+  );
+})}
     </div>
   );
 };

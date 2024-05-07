@@ -5,18 +5,16 @@ const DashboardAluno = () => {
   const [courses, setCourses] = useState([]);
 
   useEffect(() => {
-    // Recuperando o ID e o token do localStorage
     const storedId = localStorage.getItem('ID');
     const token = localStorage.getItem('token');
-
-    // Fazendo a solicitação para a API
+  
     axios.get(`http://localhost:4430/courses/get-user-courses/${storedId}`, {
       headers: {
         'Authorization': `Bearer ${token}`
       }
     })
       .then((response) => {
-        // Armazenando os cursos no estado
+      
         setCourses(response.data);
       })
       .catch((error) => {

@@ -10,6 +10,8 @@ function Register() {
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
+  const [isProfessor, setIsProfessor] = useState(false);
+  const [isStudent, setIsStudent] = useState(false);
 
   const handleBlur = () => {
     if (name !== confirmName) {
@@ -28,8 +30,9 @@ function Register() {
     } else {
       try {
         const response = await axios.post('http://localhost:4430/register', { 
-          user: name, 
-          password: password 
+          email: name, 
+          password: password ,
+          Professor: isProfessor
         });
 
         setErrorMessage('');
@@ -65,10 +68,15 @@ function Register() {
                 {successMessage && <p className="text-green-500">{successMessage}</p>}
               </div>
               <div class="flex items-center">
-                 <label  class="text-gray-900 text-base ">Professor</label>
-                 <input  type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"/>
-                 <label  class="ms-2 text-gray-900 text-base">Aluno</label>
-                 <input  type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"/>
+              <label>
+          Professor
+        <input type="checkbox" checked={isProfessor} onChange={() => setIsProfessor(!isProfessor)} />
+      </label>
+                     Aluno
+                <input type="checkbox" checked={isStudent} onChange={() => setIsStudent(!isStudent)} />
+                <label>
+                 
+                </label>
                 </div>
               <div>
                 <button type="submit" className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-primary hover:bg-primary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">

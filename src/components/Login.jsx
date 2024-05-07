@@ -8,12 +8,12 @@ function Login() {
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
 
-  const register = async (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
     try {
       const response = await axios.post('http://localhost:4430/login', { 
-        user: name, 
+        email: name, 
         password: password 
       });
       localStorage.setItem('token', response.data.token.Token);
@@ -35,7 +35,7 @@ function Login() {
             <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
               Faça login
             </h2>
-            <form className="mt-8 space-y-6" onSubmit={register}>
+            <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
               <input type="hidden" name="remember" value="true" />
               <div className="rounded-md shadow-sm -space-y-px">
                 <div>
