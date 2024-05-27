@@ -12,6 +12,7 @@ import Register from "./components/Register";
 import { Cursos } from "./pages/Cursos";
 import DashboardAluno from "./pages/DashboardAluno";
 import DashboardProfessor from "./pages/DashboardProfessor";
+import Watch from "./components/Watch";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -56,6 +57,15 @@ function App() {
                 isProfessor={isProfessor}
               />}
             />
+            <Route
+              path="/watch"
+              element={<PrivateRoute
+                element={<Watch />}
+                isAuthenticated={isAuthenticated}
+                isProfessor={isProfessor}
+              />}
+            />
+          
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
           </Routes>

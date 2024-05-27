@@ -63,27 +63,30 @@ export const Cursos = () => {
             </h2>
           </div>
         </div>
-
-        {/* project card */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-          {projects.map((project) => (
-            <div key={project._id} className="shadow-xl rounded-lg">
-              <img className="" src={project.image} alt="" />
-              <div className="p-8">
-                <h3 className="text-2xl font-semibold mb-2 text-headingcolor">
-                  {project.name}
-                </h3>
-                <p className="text-body mb-4">{project.description}</p>
-                <button
-                  onClick={() => handleEnroll(project._id)} // Ao clicar, chama a função handleEnroll com o ID do curso
-                  className="underline underline-offset-8"
-                >
-                  Inscrever-se
-                </button>
-              </div>
-            </div>
-          ))}
+<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+  {projects && projects.length > 0 ? (
+    projects.map((project) => (
+      <div key={project._id} className="shadow-xl rounded-lg">
+        <img className="" src={project.image} alt="" />
+        <div className="p-8">
+          <h3 className="text-2xl font-semibold mb-2 text-headingcolor">
+            {project.name}
+          </h3>
+          <p className="text-body mb-4">{project.description}</p>
+          <button
+            onClick={() => handleEnroll(project._id)} 
+            className="underline underline-offset-8"
+          >
+            Inscrever-se
+          </button>
         </div>
+      </div>
+    ))
+  ) : (
+    <p>Nenhum curso disponível no momento.</p>
+  )}
+</div>
+
       </div>
     </>
   );

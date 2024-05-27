@@ -1,47 +1,71 @@
-import React from 'react';
-import Navbar from './Navbar';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 
-const videos = [
-  { id: 1, title: 'Começa aqui seu curso de PHP Moderno', embedId: 'TfsO0BGvGn0' },
-  { id: 2, title: 'Esse curso de PHP serve pra mim?s de ferramentas e opções', embedId: 'dLHlHTsFqvk' },
-  { id: 4, title: 'Por que um elefante é o mascote do PHP? ', embedId: '4kSJOJEi0aQ' },
-  { id: 5, title: 'Como funciona o PHP? ', embedId: 'qFLWokqyYb4' },
-  
-];
+const DashboardAluno = () => {
+  const [courses, setCourses] = useState([]);
 
-const FigmaCourse = () => {
-  const [activeVideo, setActiveVideo] = React.useState(videos[0]);
+  useEffect(() => {
+    // Fetch dos cursos do usuário
+    const fetchUserCourses = async () => {
+      try {
+        const storedId = localStorage.getItem('ID');
+        const token = localStorage.getItem('token');
+        
+        const response = await axios.get(`http://localhost:4430/courses/get-user-courses/${storedId}`, {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        });
+
+        // Setar os cursos no estado, já incluindo o embedLink
+        const coursesWithEmbedLink = response.data.map(course => ({
+          ...course,
+          embedLink: `https://www.youtube.com/embed/${course.link}` // Supondo que embedId é retornado pela API
+        }));
+        setCourses(coursesWithEmbedLink);
+      } catch (error) {
+        console.error("Error fetching user courses:", error);
+      }
+    };
+
+    fetchUserCourses();
+  }, []);
+
+  const handleWatch = (embedLink) => {
+    // Redirecionar para a página de assistir ao vídeo com o link de incorporação correspondente
+    // Implemente a navegação para a página de assistir ao vídeo
+  };
 
   return (
-    <>
-    <Navbar/>
-    <div className="flex h-screen bg-white text-body pt-20"> {/* Increase padding-top here */}
-    
-        <div className="w-1/4 bg-gray-800 text-white overflow-auto">
-          <h2 className="text-xl font-bold p-4">PHP para iniciantes</h2>
-          <ul>
-            {videos.map(video => (
-              <li key={video.id} className="p-4 hover:bg-gray-700 cursor-pointer" onClick={() => setActiveVideo(video)}>
-                {video.title}
-              </li>
-            ))}
-          </ul>
-        </div>
-      
-      <div className="w-3/4 p-4 flex flex-col">
-        <h2 className="text-2xl font-bold mb-4">{activeVideo.title}</h2>
-        <div className="flex-grow relative">
-          <iframe
-            className="absolute top-0 left-0 w-full h-full"
-            src={`https://www.youtube.com/embed/${activeVideo.embedId}`}
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-          ></iframe>
+    <div className="lg:mx-12 mx-4 my-32" id="portfolio">
+      <div className="mb-20 flex flex-col sm:flex-row md:items-center justify-between gap-5">
+        <div>
+          <h2 className="md:text-5xl text-4xl text-headingcolor font-bold">
+            Meus Cursos
+          </h2>
         </div>
       </div>
-    </div>
-    </>
-  );
-}
 
-export default FigmaCourse;
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+        {courses.map((course) => (
+          <div key={course._id} className="shadow-xl rounded-lg">
+            <img className="" src={course.image} alt="" />
+            <div className="p-8">
+              <h3 className="text-2xl font-semibold mb-2 text-headingcolor">
+                {course.name}
+              </h3>
+              <button
+                onClick={() => handleWatch(course.embedLink)}
+                className="px-7 py-2 bg-transparent border border-black text-black rounded hover:bg-black hover:text-white transition-all duration-300"
+              >
+                Assistir
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+export default DashboardAluno;

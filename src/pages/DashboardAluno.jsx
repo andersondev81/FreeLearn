@@ -1,26 +1,36 @@
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const DashboardAluno = () => {
   const [courses, setCourses] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    const storedId = localStorage.getItem('ID');
-    const token = localStorage.getItem('token');
-  
-    axios.get(`http://localhost:4430/courses/get-user-courses/${storedId}`, {
-      headers: {
-        'Authorization': `Bearer ${token}`
-      }
-    })
-      .then((response) => {
-      
+    const fetchUserCourses = async () => {
+      try {
+        const storedId = localStorage.getItem('ID');
+        const token = localStorage.getItem('token');
+        
+        const response = await axios.get(`http://localhost:4430/courses/get-user-courses/${storedId}`, {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        });
+
         setCourses(response.data);
-      })
-      .catch((error) => {
-        console.error("Error fetching courses:", error);
-      });
+      } catch (error) {
+        console.error("Error fetching user courses:", error);
+      }
+    };
+
+    fetchUserCourses();
   }, []);
+
+  const handleWatch = (embedLink) => {
+    // Redirecionar para a página de assistir ao vídeo com o link de incorporação correspondente
+    navigate(`/watch?embedLink=${embedLink}`);
+  };
 
   return (
     <div className="lg:mx-12 mx-4 my-32" id="portfolio">
@@ -32,7 +42,6 @@ const DashboardAluno = () => {
         </div>
       </div>
 
-      {/* project card */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
         {courses.map((course) => (
           <div key={course._id} className="shadow-xl rounded-lg">
@@ -42,10 +51,11 @@ const DashboardAluno = () => {
                 {course.name}
               </h3>
               <button
-                  className="px-7 py-2 bg-transparent border border-black text-black rounded hover:bg-black hover:text-white transition-all duration-300"
-                >
-                  Assistir
-             </button>
+                onClick={() => handleWatch(course.link)}
+                className="px-7 py-2 bg-transparent border border-black text-black rounded hover:bg-black hover:text-white transition-all duration-300"
+              >
+                Assistir
+              </button>
             </div>
           </div>
         ))}
