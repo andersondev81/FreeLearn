@@ -46,7 +46,7 @@ function App() {
               element={<PrivateRoute
                 element={<DashboardAluno />}
                 isAuthenticated={isAuthenticated}
-                isProfessor={isProfessor}
+              
               />}
             />
             <Route
@@ -62,7 +62,7 @@ function App() {
               element={<PrivateRoute
                 element={<Watch />}
                 isAuthenticated={isAuthenticated}
-                isProfessor={isProfessor}
+             
               />}
             />
           

@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import Navbar from "./Navbar";
-import Footer from "./Footer";
-import { Link } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
+
 
 function Login() {
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
+  const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -18,17 +20,23 @@ function Login() {
       });
       localStorage.setItem('token', response.data.token.Token);
       localStorage.setItem('ID', response.data.token.ID);
-     localStorage.setItem('Professor', response.data.token.Professor);
-      console.log(response.data.token.ID);
-      console.log(response.data.token.Professor);
-      console.log(response.data.token.Token);
-      console.log('Login bem-sucedido');
+      localStorage.setItem('Professor', response.data.token.Professor);
+
+      setSuccessMessage('Login bem-sucedido');
+      setErrorMessage('');
+
+      console.log('Login bem-sucedido, redirecionando para o dashboard');
+      navigate('/dashboard');
     } catch (error) {
       console.log('Falha no login');
+      setErrorMessage('Falha no login. Por favor, tente novamente.');
+      setSuccessMessage('');
     }
   };
+
   return (
     <>
+
       <div className="min-h-[700px] flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-md w-full space-y-8">
           <div className="mt-6 bg-white py-8 px-6 shadow rounded-lg sm:px-10">
@@ -46,7 +54,6 @@ function Login() {
                     id="email-address"
                     name="name"
                     type="name"
-             
                     required
                     className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                     placeholder="Email"
@@ -69,6 +76,8 @@ function Login() {
                   />
                 </div>
               </div>
+              {errorMessage && <p className="text-red-500">{errorMessage}</p>}
+              {successMessage && <p className="text-green-500">{successMessage}</p>}
               <div>
                 <button type="submit" className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-primary hover:bg-primary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                   Login
@@ -78,6 +87,7 @@ function Login() {
           </div>
         </div>
       </div>
+
     </>
   );
 }
