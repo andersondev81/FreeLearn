@@ -7,7 +7,6 @@ import Navbar from "./components/Navbar";
 import Login from "./components/Login";
 import { useEffect, useState } from "react";
 import "./App.css";
-import Curso from "./pages/Curso";
 import Register from "./components/Register";
 import { Cursos } from "./pages/Cursos";
 import DashboardAluno from "./pages/DashboardAluno";
@@ -40,32 +39,35 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/sobre" element={<Sobre />} />
             <Route path="/cursos" element={<Cursos />} />
-            <Route path="/curso" element={<Curso />} />
             <Route
               path="/dashboard"
-              element={<PrivateRoute
-                element={<DashboardAluno />}
-                isAuthenticated={isAuthenticated}
-              
-              />}
+              element={
+                <PrivateRoute
+                  element={<DashboardAluno />}
+                  isAuthenticated={isAuthenticated}
+                />
+              }
             />
             <Route
               path="/dashboard/manage"
-              element={<PrivateRoute
-                element={<DashboardProfessor />}
-                isAuthenticated={isAuthenticated}
-                isProfessor={isProfessor}
-              />}
+              element={
+                <PrivateRoute
+                  element={<DashboardProfessor />}
+                  isAuthenticated={isAuthenticated}
+                  isProfessor={isProfessor}
+                />
+              }
             />
             <Route
               path="/watch"
-              element={<PrivateRoute
-                element={<Watch />}
-                isAuthenticated={isAuthenticated}
-             
-              />}
+              element={
+                <PrivateRoute
+                  element={<Watch />}
+                  isAuthenticated={isAuthenticated}
+                />
+              }
             />
-          
+
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
           </Routes>

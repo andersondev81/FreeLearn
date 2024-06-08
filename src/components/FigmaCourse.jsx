@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { useHistory } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { useHistory } from "react-router-dom";
 
 const DashboardAluno = () => {
   const [courses, setCourses] = useState([]);
@@ -9,18 +9,21 @@ const DashboardAluno = () => {
   useEffect(() => {
     const fetchUserCourses = async () => {
       try {
-        const storedId = localStorage.getItem('ID');
-        const token = localStorage.getItem('token');
-        
-        const response = await axios.get(`http://localhost:4430/courses/get-user-courses/${storedId}`, {
-          headers: {
-            'Authorization': `Bearer ${token}`
-          }
-        });
+        const storedId = localStorage.getItem("ID");
+        const token = localStorage.getItem("token");
 
-        const coursesWithEmbedLink = response.data.map(course => ({
+        const response = await axios.get(
+          `http://localhost:4430/courses/get-user-courses/${storedId}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        const coursesWithEmbedLink = response.data.map((course) => ({
           ...course,
-          embedLink: `https://www.youtube.com/embed/${course.link}`
+          embedLink: `https://www.youtube.com/embed/${course.link}`,
         }));
         setCourses(coursesWithEmbedLink);
       } catch (error) {
@@ -32,7 +35,6 @@ const DashboardAluno = () => {
   }, []);
 
   const handleWatch = (embedLink) => {
-    // Redirecionar para a página de assistir ao vídeo com o link de incorporação correspondente
     history.push(`/watch?embedLink=${embedLink}`);
   };
 

@@ -43,18 +43,18 @@ const DashboardAluno = () => {
       </div>
 
       {courses === null ? (
-        <p>Carregando...</p>
-      ) : courses.length === 0 ? (
-        <p>Não há cursos ainda.</p>
-      ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-          {courses.map((course) => (
-            <div key={course._id} className="shadow-xl rounded-lg">
-              <img className="" src={course.image} alt={course.name} />
-              <div className="p-8">
-                <h3 className="text-2xl font-semibold mb-2 text-headingcolor">
-                  {course.name}
-                </h3>
+      <p>Carregando...</p>
+    ) : (!Array.isArray(courses) || courses.length === 0) ? (
+      <p>Não há cursos ainda.</p>
+    ) : (
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+        {courses.map((course) => (
+          <div key={course._id} className="shadow-xl rounded-lg">
+            <img className="" src={course.image} alt={course.name} />
+            <div className="p-8">
+              <h3 className="text-2xl font-semibold mb-2 text-headingcolor">
+                {course.name}
+              </h3>
                 <button
                   onClick={() => handleWatch(course._id)}
                   className="px-7 py-2 bg-transparent border border-black text-black rounded hover:bg-black hover:text-white transition-all duration-300"

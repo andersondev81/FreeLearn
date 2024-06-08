@@ -9,7 +9,7 @@ const PrivateRoute = ({ element, isAuthenticated, isProfessor }) => {
   }, []);
 
   if (loading) {
-    return null; // ou você pode retornar um componente de carregamento aqui
+    return null; 
   }
 
   if (!isAuthenticated) {

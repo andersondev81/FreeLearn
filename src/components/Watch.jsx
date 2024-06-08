@@ -1,27 +1,29 @@
-import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
-import axios from 'axios';
-import Navbar from './Navbar';
+import React, { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
+import axios from "axios";
 
 const Watch = () => {
   const location = useLocation();
   const courseId = new URLSearchParams(location.search).get("courseId");
   const [course, setCourse] = useState(null);
   const [activeLesson, setActiveLesson] = useState(null);
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem("token");
 
   useEffect(() => {
     async function fetchCourse() {
       try {
-        const response = await axios.get(`http://localhost:4430/courses/get/${courseId}`, {
-          headers: {
-            'Authorization': `Bearer ${token}`
+        const response = await axios.get(
+          `http://localhost:4430/courses/get/${courseId}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
           }
-        });
+        );
         setCourse(response.data);
-        setActiveLesson(response.data.modules[0].lessons[0]); // Define a primeira aula como ativa por padrão
+        setActiveLesson(response.data.modules[0].lessons[0]);
       } catch (error) {
-        console.error('Erro ao buscar curso:', error);
+        console.error("Erro ao buscar curso:", error);
       }
     }
     fetchCourse();
@@ -39,7 +41,11 @@ const Watch = () => {
                   <h3 className="p-4 font-semibold">{module.name}</h3>
                   <ul>
                     {module.lessons.map((lesson, idx) => (
-                      <li key={idx} className="p-4 hover:bg-gray-700 cursor-pointer" onClick={() => setActiveLesson(lesson)}>
+                      <li
+                        key={idx}
+                        className="p-4 hover:bg-gray-700 cursor-pointer"
+                        onClick={() => setActiveLesson(lesson)}
+                      >
                         {lesson.name}
                       </li>
                     ))}

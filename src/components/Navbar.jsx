@@ -6,22 +6,21 @@ import { HashLink as LinkRoute } from "react-router-hash-link";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isAuthenticated, setIsAuthenticated] = useState(false); 
-  const [isProfessor, setIsProfessor] = useState(false); 
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isProfessor, setIsProfessor] = useState(false);
   const location = useLocation();
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  // Função para fazer logout
   const handleLogout = () => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('ID');
-    localStorage.removeItem('Professor');
+    localStorage.removeItem("token");
+    localStorage.removeItem("ID");
+    localStorage.removeItem("Professor");
     setIsAuthenticated(false);
     setIsProfessor(false);
-  
+
     window.location.reload();
   };
 
