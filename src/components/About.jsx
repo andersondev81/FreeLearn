@@ -7,7 +7,7 @@ const About = () => {
           <img src={proPic} alt="" className="w-full sm:w-12/12" />
         </div>
         <div className="sm:w-1/2">
-          <h2 className="md:text-5xl text-4xl text-headingcolor font-bold ">
+          <h2 className="md:text-5xl text-7xl text-headingcolor font-bold ">
             Sobre
           </h2>
           <p className="mt-8 md:pr-8 mb-8">
