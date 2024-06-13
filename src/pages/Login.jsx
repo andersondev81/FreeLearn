@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
@@ -8,6 +8,14 @@ function Login() {
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const message = localStorage.getItem("successMessage");
+    if (message) {
+      setSuccessMessage(message);
+      localStorage.removeItem("successMessage");
+    }
+  }, []);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -21,11 +29,13 @@ function Login() {
       localStorage.setItem("ID", response.data.token.ID);
       localStorage.setItem("Professor", response.data.token.Professor);
 
-      setSuccessMessage("Login bem-sucedido");
-      setErrorMessage("");
+      // Armazenar mensagem de sucesso no localStorage
+      localStorage.setItem("successMessage", "Login bem-sucedido");
+
+      console.log(response.data.token.Professor);
 
       console.log("Login bem-sucedido, redirecionando para o dashboard");
-      navigate("/dashboard");
+      window.location.reload();
     } catch (error) {
       console.log("Falha no login");
       setErrorMessage("Falha no login. Por favor, tente novamente.");

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import Search from "../components/Searchform";
+import SearchForm from "../components/SearchForm";
 
-export const Cursos = () => {
+export const Courses = () => {
   const [projects, setProjects] = useState([]);
   const [token, setToken] = useState(""); 
   const [userId, setId] = useState(""); 
@@ -16,17 +16,25 @@ export const Cursos = () => {
       }
     }
 
-    fetch("http://localhost:4430/get", {
+    fetchCourses();
+  }, []);
+
+  const fetchCourses = (query = "") => {
+    const url = query
+      ? `http://localhost:4430/search?q=${query}`
+      : "http://localhost:4430/get";
+    
+    fetch(url, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${storedToken}`,
+        Authorization: `Bearer ${token}`,
       },
     })
       .then((res) => res.json())
       .then((data) => setProjects(data))
       .catch((error) => console.error("Error fetching courses:", error));
-  }, []);
+  };
 
   const handleEnroll = (courseId) => {
     const storedId = localStorage.getItem("ID");
@@ -46,15 +54,22 @@ export const Cursos = () => {
       .catch((error) => console.error("Error enrolling in course:", error));
   };
 
+  const handleSearch = (query) => {
+    fetchCourses(query);
+  };
+
   return (
     <>
       <div className="min-h-[700px] lg:mx-12 mx-4  [h-screen]" id="portfolio">
-     
         <div className="flex flex-col sm:flex-row md:items-center justify-between gap-5">
           <div>
-            <h2 className="md:text-5xl text-4xl text-headingcolor font-bold my-32">
+            <h2 className="md:text-5xl text-4xl text-headingcolor font-bold my-20">
               Nossos principais cursos
+              <div className="mr-20 text-2xl my-5">
+              <SearchForm onSearch={handleSearch} />
+              </div>
             </h2>
+            
           </div>
         </div>
 

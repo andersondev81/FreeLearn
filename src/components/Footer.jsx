@@ -17,7 +17,7 @@ const Footer = () => {
       </div>
       <hr />
       <div className="mt-5 flex flex-col md:flex-row justify-between gap-2">
-        <p>Criado pela Freelearn Dev team.</p>
+        <p>Criado pela FreeLearn Dev team.</p>
         <div className="space-x-6">
           <a href="/" className="hover:text-slate-400">
             Politica de privacidade

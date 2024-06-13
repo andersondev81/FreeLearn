@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
+
 const DashboardAluno = () => {
   const [courses, setCourses] = useState(null);
   const navigate = useNavigate();
@@ -36,6 +37,7 @@ const DashboardAluno = () => {
     <div className="lg:mx-12 mx-4 my-32" id="portfolio">
       <div className="mb-20 flex flex-col sm:flex-row md:items-center justify-between gap-5">
         <div>
+
           <h2 className="md:text-5xl text-4xl text-headingcolor font-bold">
             Meus Cursos
           </h2>

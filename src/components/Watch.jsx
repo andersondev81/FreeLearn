@@ -31,7 +31,7 @@ const Watch = () => {
 
   return (
     <>
-      <div className="flex h-screen bg-white text-body pt-20">
+      <div className="flex h-screen bg-white text-body pt-10">
         <div className="w-1/4 bg-gray-800 text-white overflow-auto">
           {course && (
             <>

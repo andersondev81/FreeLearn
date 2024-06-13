@@ -1,15 +1,28 @@
-import React from "react";
+import React, { useState } from "react";
 
-function SearchForm() {
+function SearchForm({ onSearch }) {
+  const [query, setQuery] = useState("");
+
+  const handleInputChange = (e) => {
+    setQuery(e.target.value);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onSearch(query);
+  };
+
   return (
     <div className="">
-      <form action="/search" className="max-w-[480px] w-full px-4">
+      <form onSubmit={handleSubmit} className="max-w-[480px] w-full">
         <div className="relative">
           <input
             type="text"
             name="q"
             className="w-full border h-12 shadow p-4 rounded-full dark:text-gray-800 dark:border-gray-700 dark:bg-gray-200"
             placeholder="Search"
+            value={query}
+            onChange={handleInputChange}
           />
           <button type="submit">
             <svg

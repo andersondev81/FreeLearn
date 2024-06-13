@@ -1,7 +1,7 @@
-import { Route, Navigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 
-const PrivateRoute = ({ element, isAuthenticated, isProfessor }) => {
+const PrivateRoute = ({ component: Component, isAuthenticated, isProfessor, path }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -16,11 +16,11 @@ const PrivateRoute = ({ element, isAuthenticated, isProfessor }) => {
     return <Navigate to="/login" />;
   }
 
-  if (element.props.path === "/dashboard/manage" && !isProfessor) {
+  if (path === "/dashboard/manage" && !isProfessor) {
     return <Navigate to="/dashboard" />;
   }
 
-  return element;
+  return <Component />;
 };
 
 export default PrivateRoute;

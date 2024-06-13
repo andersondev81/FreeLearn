@@ -88,7 +88,6 @@ const Navbar = () => {
             )}
           </div>
 
-          {/* contact me btn */}
           <div className="lg:block hidden space-x-1">
             {!isAuthenticated && (
               <>
@@ -155,6 +154,26 @@ const Navbar = () => {
                 DASHBOARD
               </LinkRoute>
             )}
+             <div className="lg:block  space-x-1">
+            {!isAuthenticated && (
+              <>
+                <button className="px-4 py-2 bg-transparent border border-primary text-primary rounded hover:bg-primary hover:text-white transition-all duration-300">
+                  <LinkRoute to="/login">Login</LinkRoute>
+                </button>
+                <button className="px-4 py-2 bg-transparent border border-primary text-primary rounded hover:bg-primary hover:text-white transition-all duration-300">
+                  <LinkRoute to="/register">Cadastrar</LinkRoute>
+                </button>
+              </>
+            )}
+            {isAuthenticated && (
+              <button
+                onClick={handleLogout}
+                className="px-4 py-2 bg-red-500 border border-primary text-white rounded hover:bg-red-600 transition-all duration-300"
+              >
+                Logout
+              </button>
+            )}
+          </div>
           </div>
         )}
       </nav>

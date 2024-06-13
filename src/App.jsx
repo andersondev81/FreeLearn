@@ -8,7 +8,7 @@ import Login from "./pages/Login";
 import { useEffect, useState } from "react";
 import "./App.css";
 import Register from "./pages/Register";
-import { Cursos } from "./pages/Courses";
+import { Courses } from "./pages/Courses";
 import DashboardAluno from "./pages/DashboardAluno";
 import DashboardProfessor from "./pages/DashboardProfessor";
 import Watch from "./components/Watch";
@@ -27,6 +27,8 @@ function App() {
 
     if (professor === "true") {
       setIsProfessor(true);
+    } else {
+      setIsProfessor(false);
     }
   }, []);
 
@@ -38,13 +40,14 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/sobre" element={<Sobre />} />
-            <Route path="/cursos" element={<Cursos />} />
+            <Route path="/cursos" element={<Courses />} />
             <Route
               path="/dashboard"
               element={
                 <PrivateRoute
-                  element={<DashboardAluno />}
+                  component={DashboardAluno}
                   isAuthenticated={isAuthenticated}
+                  path="/dashboard"
                 />
               }
             />
@@ -52,9 +55,10 @@ function App() {
               path="/dashboard/manage"
               element={
                 <PrivateRoute
-                  element={<DashboardProfessor />}
+                  component={DashboardProfessor}
                   isAuthenticated={isAuthenticated}
                   isProfessor={isProfessor}
+                  path="/dashboard/manage"
                 />
               }
             />
@@ -62,12 +66,12 @@ function App() {
               path="/watch"
               element={
                 <PrivateRoute
-                  element={<Watch />}
+                  component={Watch}
                   isAuthenticated={isAuthenticated}
+                  path="/watch"
                 />
               }
             />
-
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
           </Routes>
