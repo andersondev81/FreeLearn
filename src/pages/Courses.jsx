@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from 'react-router-dom'; // Adicionar importação do useNavigate
 import SearchForm from "../components/SearchForm";
+import CourseDetails from "../components/CourseDetails";
 
 export const Courses = () => {
   const [projects, setProjects] = useState([]);
-  const [token, setToken] = useState(""); 
+  const [token, setToken] = useState("");  
   const [userId, setId] = useState(""); 
+  const navigate = useNavigate(); // Definir useNavigate
 
   useEffect(() => {
     const storedToken = localStorage.getItem("token");
@@ -58,6 +61,10 @@ export const Courses = () => {
     fetchCourses(query);
   };
 
+  const handleDetails = (courseId) => {
+    navigate(`/course/${courseId}`); // Navegar para os detalhes do curso
+  };
+
   return (
     <>
       <div className="min-h-[700px] lg:mx-12 mx-4  [h-screen]" id="portfolio">
@@ -88,6 +95,12 @@ export const Courses = () => {
                     className="underline underline-offset-8"
                   >
                     Inscrever-se
+                  </button>
+                  <button
+                    onClick={() => handleDetails(project._id)} // Corrigido para project._id
+                    className="px-7 py-2 ml-4 bg-transparent border border-black text-black rounded hover:bg-black hover:text-white transition-all duration-300"
+                  >
+                    Detalhes
                   </button>
                 </div>
               </div>

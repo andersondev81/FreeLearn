@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-
 const DashboardAluno = () => {
   const [courses, setCourses] = useState(null);
   const navigate = useNavigate();
@@ -33,11 +32,14 @@ const DashboardAluno = () => {
     navigate(`/watch?courseId=${courseId}`);
   };
 
+  const handleDetails = (courseId) => {
+    navigate(`/course/${courseId}`); // Adicionar navegação para os detalhes do curso
+  };
+
   return (
     <div className="lg:mx-12 mx-4 my-32" id="portfolio">
       <div className="mb-20 flex flex-col sm:flex-row md:items-center justify-between gap-5">
         <div>
-
           <h2 className="md:text-5xl text-4xl text-headingcolor font-bold">
             Meus Cursos
           </h2>
@@ -62,6 +64,12 @@ const DashboardAluno = () => {
                   className="px-7 py-2 bg-transparent border border-black text-black rounded hover:bg-black hover:text-white transition-all duration-300"
                 >
                   Assistir
+                </button>
+                <button
+                  onClick={() => handleDetails(course._id)}
+                  className="px-7 py-2 ml-4 bg-transparent border border-black text-black rounded hover:bg-black hover:text-white transition-all duration-300"
+                >
+                  Detalhes
                 </button>
               </div>
             </div>

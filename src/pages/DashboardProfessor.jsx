@@ -10,8 +10,10 @@ const DashboardProfessor = () => {
   const [modules, setModules] = useState([
     { name: "", lessons: [{ name: "", link: "" }] },
   ]);
+  const [editingCourse, setEditingCourse] = useState(null); // State to handle editing
 
   const token = localStorage.getItem("token");
+  const professorId = localStorage.getItem("ID");
 
   useEffect(() => {
     getAllCourses();
@@ -24,7 +26,10 @@ const DashboardProfessor = () => {
           Authorization: `Bearer ${token}`,
         },
       });
-      setCourses(response.data);
+
+      // Filtrar os cursos para mostrar apenas aqueles criados pelo professor autenticado
+      const filteredCourses = response.data.filter(course => course.creator_id === professorId);
+      setCourses(filteredCourses);
     } catch (error) {
       console.error("Error fetching courses:", error);
     }
@@ -48,8 +53,34 @@ const DashboardProfessor = () => {
         }
       );
       getAllCourses();
+      resetForm();
     } catch (error) {
       console.error("Error creating course:", error);
+    }
+  };
+
+  const updateCourse = async () => {
+    try {
+      await axios.put(
+        `http://localhost:4430/courses/update/${editingCourse._id}`,
+        {
+          name,
+          description,
+          image,
+          link,
+          modules,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      getAllCourses();
+      resetForm();
+      setEditingCourse(null);
+    } catch (error) {
+      console.error("Error updating course:", error);
     }
   };
 
@@ -88,14 +119,33 @@ const DashboardProfessor = () => {
     setModules(newModules);
   };
 
+  const resetForm = () => {
+    setName("");
+    setDescription("");
+    setImage("");
+    setLink("");
+    setModules([{ name: "", lessons: [{ name: "", link: "" }] }]);
+  };
+
+  const startEditing = (course) => {
+    setName(course.name);
+    setDescription(course.description);
+    setImage(course.image);
+    setLink(course.link);
+    setModules(course.modules);
+    setEditingCourse(course);
+  };
+
   return (
     <div className="p-5">
-      <h1 className="text-4xl font-bold mb-6 text-center">
+      <h1 className="text-4xl font-bold mb-6 text-center text-gray-800">
         Dashboard do Professor
       </h1>
 
       <div className="mb-8 bg-white shadow-md rounded-lg p-6">
-        <h2 className="text-2xl font-semibold mb-4">Adicionar Novo Curso</h2>
+        <h2 className="text-2xl font-semibold mb-4 text-gray-800">
+          {editingCourse ? "Editar Curso" : "Adicionar Novo Curso"}
+        </h2>
         <div className="flex flex-col md:flex-row gap-4 mb-4">
           <input
             className="border p-3 rounded-md flex-1"
@@ -129,7 +179,7 @@ const DashboardProfessor = () => {
 
         {modules.map((module, moduleIndex) => (
           <div key={moduleIndex} className="mb-4 bg-gray-100 p-4 rounded-md">
-            <h3 className="text-xl font-semibold mb-2">
+            <h3 className="text-xl font-semibold mb-2 text-gray-700">
               Módulo {moduleIndex + 1}
             </h3>
             <input
@@ -174,25 +224,38 @@ const DashboardProfessor = () => {
               </div>
             ))}
             <button
-              className="bg-green-500 text-white p-2 rounded-md hover:bg-green-600 transition-all"
+              className="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600 transition-all"
               onClick={() => addLesson(moduleIndex)}
             >
               Adicionar Aula
             </button>
           </div>
         ))}
+        <div className="">
         <button
-          className="bg-blue-500 text-white p-3 mt-4 rounded-md hover:bg-blue-600 transition-all"
+          className="bg-blue-500 text-white p-3 mt-4 rounded-md hover:bg-blue-600 transition-all mr-1"
           onClick={addModule}
         >
           Adicionar Módulo
         </button>
         <button
           className="bg-blue-500 text-white p-3 mt-4 rounded-md hover:bg-blue-600 transition-all"
-          onClick={postCourse}
+          onClick={editingCourse ? updateCourse : postCourse}
         >
-          Criar Curso
+          {editingCourse ? "Atualizar Curso" : "Criar Curso"}
         </button>
+        </div>
+        {editingCourse && (
+          <button
+            className="bg-gray-500 text-white p-3 mt-4 rounded-md hover:bg-gray-600 transition-all"
+            onClick={() => {
+              resetForm();
+              setEditingCourse(null);
+            }}
+          >
+            Cancelar Edição
+          </button>
+        )}
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -208,7 +271,7 @@ const DashboardProfessor = () => {
                 className="w-full h-48 object-cover"
               />
               <div className="p-4">
-                <h2 className="text-xl font-semibold mb-2">{course.name}</h2>
+                <h2 className="text-xl font-semibold mb-2 text-gray-800">{course.name}</h2>
                 <p className="text-gray-600 mb-4">{course.description}</p>
                 <a
                   href={course.link}
@@ -218,12 +281,20 @@ const DashboardProfessor = () => {
                 >
                   Link para o curso
                 </a>
-                <button
-                  className="bg-red-500 text-white p-2 mt-4 w-full rounded-md hover:bg-red-600 transition-all"
-                  onClick={() => deleteCourse(course._id)}
-                >
-                  Excluir
-                </button>
+                <div className="flex justify-between mt-4 ">
+                  <button
+                    className="bg-yellow-500 text-white p-2 rounded-md hover:bg-yellow-600 transition-all"
+                    onClick={() => startEditing(course)}
+                  >
+                    Editar
+                  </button>
+                  <button
+                    className="bg-red-500 text-white p-2 rounded-md hover:bg-red-600 transition-all"
+                    onClick={() => deleteCourse(course._id)}
+                  >
+                    Excluir
+                  </button>
+                </div>
               </div>
             </div>
           ))}

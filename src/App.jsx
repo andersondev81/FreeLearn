@@ -12,6 +12,7 @@ import { Courses } from "./pages/Courses";
 import DashboardAluno from "./pages/DashboardAluno";
 import DashboardProfessor from "./pages/DashboardProfessor";
 import Watch from "./components/Watch";
+import CourseDetails from "./components/CourseDetails";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -19,15 +20,16 @@ function App() {
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-    const professor = localStorage.getItem("professor");
+    const Professor = localStorage.getItem("Professor");
 
     if (token) {
       setIsAuthenticated(true);
     }
 
-    if (professor === "true") {
+    if (Professor === "true") {
       setIsProfessor(true);
     } else {
+      console.log("nao e professor")
       setIsProfessor(false);
     }
   }, []);
@@ -74,6 +76,8 @@ function App() {
             />
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/course/:id" element={<CourseDetails />} /> {/* Adicionar a nova rota */}
+
           </Routes>
         </div>
         <Footer />
